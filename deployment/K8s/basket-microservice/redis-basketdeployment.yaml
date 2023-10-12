@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redisdb-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redisdb-pod
+  template:
+    metadata:
+      labels:
+        app: redisdb-pod
+    spec:
+      containers:
+      - name: redisdb-container
+        image: redis:alpine
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "200m"
+          limits:
+            memory: "2Gi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redisdb-service
+spec:
+  selector:
+    app: redisdb-pod
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
+  type: NodePort

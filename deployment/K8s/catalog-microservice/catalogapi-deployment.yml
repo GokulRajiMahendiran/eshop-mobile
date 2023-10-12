@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalogapi-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: catalogapi-pod
+  template:
+    metadata:
+      labels:
+        app: catalogapi-pod
+    spec:
+      containers:
+      - name: catalogapi-container
+        image: crmohan74/aspneteshopper:catalogapi
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          value: Development
+        - name: DatabaseSettings__ConnectionString
+          valueFrom:
+            configMapKeyRef:
+              name: mongo-configmap
+              key: connection_string
+          
+
