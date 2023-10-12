@@ -57,19 +57,6 @@ namespace AspnetRunBasics
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-            
-            app.UseStaticFiles();
-
             app.UseRouting();
 
             app.UseAuthorization();
@@ -83,15 +70,27 @@ namespace AspnetRunBasics
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
             });
+
+            if (!env.IsDevelopment())
+            {
+                app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
+            }
+            else
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
+            app.UseStaticFiles();
         }
 
         private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
         {
-            // In this case will wait for
-            //  2 ^ 1 = 2 seconds then
-            //  2 ^ 2 = 4 seconds then
-            //  2 ^ 3 = 8 seconds then
-            //  2 ^ 4 = 16 seconds then
+            // In this case, it will wait for
+            //  2 ^ 1 = 2 seconds, then
+            //  2 ^ 2 = 4 seconds, then
+            //  2 ^ 3 = 8 seconds, then
+            //  2 ^ 4 = 16 seconds, then
             //  2 ^ 5 = 32 seconds
 
             return HttpPolicyExtensions
