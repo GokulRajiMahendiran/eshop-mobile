@@ -6,7 +6,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "catalog.api",
+          "Host": "eshop-us-dev-catalogapi.azurewebsites.net",
           "Port": "80"
         }
       ],
