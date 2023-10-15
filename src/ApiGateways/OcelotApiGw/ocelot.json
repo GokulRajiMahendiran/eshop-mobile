@@ -6,8 +6,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
-          "Port": "8000"
+          "Host": "eshop-us-dev-catalogapi.azurewebsites.net",
+          "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/Catalog",
