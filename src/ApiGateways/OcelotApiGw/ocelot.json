@@ -44,7 +44,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "localhost",
+          "Host": "eshop-us-dev-basketapi.azurewebsites.net",
           "Port": "8001"
         }
       ],

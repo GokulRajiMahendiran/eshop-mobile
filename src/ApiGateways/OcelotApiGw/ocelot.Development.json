@@ -44,7 +44,7 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "basket.api",
+          "Host": "eshop-us-dev-basketapi.azurewebsites.net",
           "Port": "80"
         }
       ],
